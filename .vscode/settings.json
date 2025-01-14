@@ -53,11 +53,12 @@
 		"selectivly",
 		"servly",
 		"servly-azure",
-		"sessionly",
 		"smoothly",
 		"tidily",
 		"transactly",
 		"typedly",
-		"uply"
-	]
+		"uply",
+		"paramly",
+	],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,7 +1,7 @@
 {
-	"name": "@utily/library-template",
-	"version": "0.0.18",
-	"description": "Template library for Typescript.",
+	"name": "@utily/cli-kv-manager",
+	"version": "0.0.0",
+	"description": "Command line tool to manage Cloudflare Workers KV through worker-kv-manager.",
 	"author": "Utily Contributors",
 	"license": "MIT",
 	"repository": "https://github.com/utily/library-template",
@@ -10,22 +10,12 @@
 	},
 	"homepage": "https://github.com/utily",
 	"private": false,
-	"type": "module",
-	"main": "./dist/cjs/index.js",
-	"module": "./dist/mjs/index.js",
-	"types": "./dist/types/index.d.ts",
-	"exports": {
-		".": {
-			"import": {
-				"default": "./dist/mjs/index.js",
-				"types": "./dist/types/index.d.ts"
-			},
-			"require": {
-				"default": "./dist/cjs/index.js",
-				"types": "./dist/types/index.d.ts"
-			}
-		}
+	"bin": {
+		"kv": "./dist/index.js"
 	},
+	"type": "commonjs",
+	"main": "./dist/index.js",
+	"types": "./dist/types/index.d.ts",
 	"git": {
 		"tagName": "v${version}"
 	},
@@ -35,7 +25,7 @@
 	"scripts": {
 		"lint": "eslint --max-warnings=0 '**/*.{ts,tsx}'",
 		"fix": "eslint '**/*.{ts,tsx}' --fix",
-		"build": "rimraf dist/* && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
+		"build": "rimraf dist/* && npx rollup -c",
 		"test": "vitest --run",
 		"coverage": "vitest --coverage",
 		"prepare": "npm run build",
@@ -43,16 +33,25 @@
 		"verify": "npm run build && npm run test && npm run lint && npm audit"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.2",
-		"@typescript-eslint/eslint-plugin": "8.18.1",
-		"@typescript-eslint/parser": "8.18.1",
-		"@vitest/coverage-istanbul": "^2.1.8",
+		"@rollup/plugin-json": "^6.1.0",
+		"@rollup/plugin-node-resolve": "^16.0.0",
+		"@rollup/plugin-typescript": "^8.3.3",
+		"@types/node": "^22.10.6",
+		"@typescript-eslint/eslint-plugin": "8.20.0",
+		"@typescript-eslint/parser": "8.20.0",
+		"@vitest/coverage-v8": "^2.1.8",
 		"eslint": "^8.56.0",
 		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20231004",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"prettierx": "github:utily/prettierx#utily-20231004",
 		"rimraf": "^6.0.1",
-		"typescript": "5.7.2",
+		"rollup": "^4.30.1",
+		"typescript": "5.7.3",
 		"vitest": "^2.1.8"
+	},
+	"dependencies": {
+		"cloudly-http": "^0.2.0-alpha.21",
+		"cloudly-storage": "^0.10.17",
+		"paramly": "^0.0.25"
 	}
 }
