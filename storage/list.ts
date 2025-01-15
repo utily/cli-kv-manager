@@ -12,25 +12,9 @@ export const list: paramly.Command<State> = {
 		[". false all", "List all items without loading values."],
 	],
 	async execute(state, argument, flags) {
-		const prefix = argument[0] == "." ? "" : argument[0]
-		const values = argument[1] == "true"
-		const all = argument[2] == "all"
-		const limit = all ? 500 : argument[2] ? Number.parseInt(argument[2]) : undefined
-		let result: any | undefined
-		let cursor: string | undefined
-		do {
-			result = await state?.client.list({
-				prefix,
-				values,
-				limit,
-				cursor,
-			})
-			if (result)
-				console.log(JSON.stringify(result, undefined, "\t"))
-			cursor = result?.cursor
-		} while (all && result.cursor)
-		if (result.cursor)
-			console.info("cursor:", result.cursor)
+		const result = await state?.list(State.ListOptions.from(argument))
+		if (typeof result == "string")
+			console.info("cursor:", result)
 		return !!result
 	},
 }

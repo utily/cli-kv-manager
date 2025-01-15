@@ -37,10 +37,11 @@ export const application = new paramly.Application<State>(
 		},
 	],
 	async flags => {
-		const result = State.create((flags.server ?? flags.s)?.[0] ?? "https://example.com/kv", (flags.key ?? flags.k)?.[0])
 		const user = (flags.user ?? flags.u)?.[0]
-		if (user)
-			result.client.authorization = { user, password: (flags.password ?? flags.p)?.[0] }
+		const result = State.create(
+			(flags.server ?? flags.s)?.[0] ?? "https://example.com/kv",
+			user ? { user, password: (flags.password ?? flags.p)?.[0] } : (flags.key ?? flags.k)?.[0]
+		)
 		return result
 	}
 )
