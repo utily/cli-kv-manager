@@ -1,6 +1,6 @@
 {
 	"name": "@utily/cli-kv-manager",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Command line tool to manage Cloudflare Workers KV through worker-kv-manager.",
 	"author": "Utily Contributors",
 	"license": "MIT",
